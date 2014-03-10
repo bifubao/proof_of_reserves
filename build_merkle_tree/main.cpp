@@ -45,12 +45,12 @@ struct Summary {
 // make_parent_node
 void make_parent_node(const Node *l, const Node *r, Node *p) {
   unsigned char hash[SHA256_DIGEST_LENGTH];
-  unsigned char buf[24];
+    unsigned char buf[24]= {0};
   
   p->sum = l->sum + r->sum;
   memcpy(buf,    (unsigned char *)&(p->sum),  8);
   memcpy(buf+8,  (unsigned char *)l->hash, 8);
-  memcpy(buf+16, (unsigned char *)l->hash, 8);
+  memcpy(buf+16, (unsigned char *)r->hash, 8);
   SHA256(buf, 24, hash);
   memcpy(p->hash, hash, 8);
 }
@@ -61,7 +61,7 @@ void make_user_node(const char *uid, long long balance, Node *node) {
   char buf[17] = {0};
   node->sum = balance;
   sprintf(buf, "%016lld", balance);
-//  printf("%s\n", buf);
+
   SHA256_CTX sha256;
   SHA256_Init(&sha256);
   SHA256_Update(&sha256, uid, strlen(uid));
