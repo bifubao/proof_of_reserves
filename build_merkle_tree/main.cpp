@@ -165,7 +165,7 @@ int main(int argc, char **argv)
   dump_hex(nodes[0].hash, 8);
   std::cout << std::endl;
   
-  std::cout << summary.user_count << "\t" << summary.sum << "\t"
+  std::cout << "summary:\t" << summary.user_count << "\t" << summary.sum << "\t"
     << summary.padding_sum << "\t" << summary.level << std::endl;
   
   return 0;
