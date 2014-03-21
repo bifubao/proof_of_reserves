@@ -81,6 +81,10 @@ void build_parent_nodes(Nodes *nodes, Nodes *parents) {
   }
 }
 
+void build_empty_node(const char *uid, Node *node) {
+  make_user_node(uid, 0, node);
+}
+
 // dump_hex
 void dump_hex(unsigned char *buf, size_t len) {
   for (size_t i = 0; i < len; i++) {
@@ -101,6 +105,8 @@ int main(int argc, char **argv)
   
   Node node;
   Nodes nodes;
+  Node empty_node;
+
   struct Summary summary;
   memset(&summary, 0, sizeof(struct Summary));
   
@@ -126,6 +132,10 @@ int main(int argc, char **argv)
     std::cerr << "open file failure: " << file_input << std::endl;
     exit(EXIT_FAILURE);
   }
+
+  std::string empty_uid = "EMPTY_NODE_STRING";
+  build_empty_node(empty_uid.c_str(), &empty_node);
+
   while (!fin.eof()) {
     std::string uid;
     std::string balance;
@@ -147,8 +157,8 @@ int main(int argc, char **argv)
   parents.reserve(nodes.size()%2 + 1);
   while (nodes.size() > 1) {
     if (nodes.size() % 2 == 1) {
-      summary.padding_sum += nodes[nodes.size()-1].sum;
-      nodes.push_back(nodes[nodes.size()-1]);
+      summary.padding_sum += empty_node.sum;
+      nodes.push_back(empty_node);
     }
     
     for (Nodes::iterator it = nodes.begin(); it != nodes.end(); it++) {
