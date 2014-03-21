@@ -157,7 +157,7 @@ int main(int argc, char **argv)
   parents.reserve(nodes.size()%2 + 1);
   while (nodes.size() > 1) {
     if (nodes.size() % 2 == 1) {
-      summary.padding_sum += empty_node.sum;
+      // push an empty node if the number of nodes is odd
       nodes.push_back(empty_node);
     }
     
