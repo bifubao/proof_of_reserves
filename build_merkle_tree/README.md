@@ -92,5 +92,4 @@ summary:	17	48421531263279	0	5
 #
 # last line format: <count(users)> \t <sum(balance)> \t <sum(padding node balance)> \t <level>
 #
-17	48421531263279	1499954363370	5
 ````
